@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{/layout.html}">
+<head></head>
+<body>
+<div layout:fragment="contents">
+    <section class="expenseList">
+        <h2>People that owe me</h2>
+        <p id="no_expenses" th:if="${#lists.isEmpty(expenses)}">Nobody owes you anything</p>
+    </section>
+</div>
+</body>
+
+</html>
