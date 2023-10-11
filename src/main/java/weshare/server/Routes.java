@@ -11,13 +11,15 @@ public class Routes {
     public static final String LOGOUT = "/logout";
     public static final String EXPENSES = "/expenses";
     public static final String PAYMENTREQUESTSENT = "/paymentrequests_sent";
+    public static final String PAYMENTREQUESTRECEIVED = "/paymentrequests_received";
 
     public static void configure(WeShareServer server) {
         server.routes(() -> {
             post(LOGIN_ACTION,  PersonController.login);
             get(LOGOUT,         PersonController.logout);
             get(EXPENSES,           ExpensesController.view);
-            get(PAYMENTREQUESTSENT, PaymentRequestsController.paymentRe);
+            get(PAYMENTREQUESTSENT, PaymentRequestsController.paymentRequestSentView);
+            get(PAYMENTREQUESTRECEIVED, PaymentRequestsController.paymentRequestReceivedView);
         });
     }
 }

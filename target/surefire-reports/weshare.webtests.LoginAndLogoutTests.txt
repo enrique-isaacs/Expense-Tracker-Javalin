@@ -1,0 +1,31 @@
+-------------------------------------------------------------------------------
+Test set: weshare.webtests.LoginAndLogoutTests
+-------------------------------------------------------------------------------
+Tests run: 3, Failures: 0, Errors: 3, Skipped: 0, Time elapsed: 4.632 s <<< FAILURE! - in weshare.webtests.LoginAndLogoutTests
+logout  Time elapsed: 4.179 s  <<< ERROR!
+org.openqa.selenium.SessionNotCreatedException: 
+Could not start a new session. Response code 500. Message: unknown error: cannot find Chrome binary 
+Host info: host: 'pop-os', ip: '127.0.1.1'
+Build info: version: '4.13.0', revision: 'ba948ece5b*'
+System info: os.name: 'Linux', os.arch: 'amd64', os.version: '6.5.4-76060504-generic', java.version: '17.0.8.1'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Command: [null, newSession {capabilities=[Capabilities {browserName: chrome, goog:chromeOptions: {args: [--remote-allow-origins=*, --no-sandbox, --headless, --disable-gpu, --start-maximized, --start-fullscreen], extensions: []}}]}]
+
+successfulLogin  Time elapsed: 0.206 s  <<< ERROR!
+org.openqa.selenium.SessionNotCreatedException: 
+Could not start a new session. Response code 500. Message: unknown error: cannot find Chrome binary 
+Host info: host: 'pop-os', ip: '127.0.1.1'
+Build info: version: '4.13.0', revision: 'ba948ece5b*'
+System info: os.name: 'Linux', os.arch: 'amd64', os.version: '6.5.4-76060504-generic', java.version: '17.0.8.1'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Command: [null, newSession {capabilities=[Capabilities {browserName: chrome, goog:chromeOptions: {args: [--remote-allow-origins=*, --no-sandbox, --headless, --disable-gpu, --start-maximized, --start-fullscreen], extensions: []}}]}]
+
+redirectWhenNotLoggedIn  Time elapsed: 0.205 s  <<< ERROR!
+org.openqa.selenium.SessionNotCreatedException: 
+Could not start a new session. Response code 500. Message: unknown error: cannot find Chrome binary 
+Host info: host: 'pop-os', ip: '127.0.1.1'
+Build info: version: '4.13.0', revision: 'ba948ece5b*'
+System info: os.name: 'Linux', os.arch: 'amd64', os.version: '6.5.4-76060504-generic', java.version: '17.0.8.1'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Command: [null, newSession {capabilities=[Capabilities {browserName: chrome, goog:chromeOptions: {args: [--remote-allow-origins=*, --no-sandbox, --headless, --disable-gpu, --start-maximized, --start-fullscreen], extensions: []}}]}]
+
