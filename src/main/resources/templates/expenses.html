@@ -25,7 +25,7 @@
                 <tr th:each="expense : ${expenses}">
                     <td th:id = "date_+${expense.id}" th:text="${expense.getDate()}">When</td>
                     <td th:id="description_+${expense.id}">
-                        <a th:href="@{/paymentrequest?expenseId=${expense.id}}" th:text="${expense.getDescription()}">What</a>
+                        <a th:href="'/paymentrequest?expenseId=' +${expense.id}" th:id="payment_request_+${expense.id}" th:text="${expense.getDescription()}">What</a>
                     </td>
                     <td th:id = "amount_+${expense.id}" th:text="${expense.getAmount()}">Amount Spent</td>
                     <td th:id = "request_+${expense.id}" th:text="${expense.totalAmountOfPaymentsRequested()}">Payments Requested</td>

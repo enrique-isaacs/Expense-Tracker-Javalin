@@ -12,6 +12,8 @@ public class Routes {
     public static final String EXPENSES = "/expenses";
     public static final String NEWEXPENSES = "/newexpenses";
     public static final String PAYMENTREQUESTSENT = "/paymentrequests_sent";
+    public static final String PAYMENTREQUEST = "/paymentrequest";
+    public static final String PAYMENTREQUESTACTION = "/paymentrequest.action";
     public static final String PAYMENTREQUESTRECEIVED = "/paymentrequests_received";
     public static final String CREATEEXPENSE = "/expense.action";
 
@@ -21,9 +23,11 @@ public class Routes {
             get(LOGOUT,         PersonController.logout);
             get(EXPENSES,           ExpensesController.view);
             get(PAYMENTREQUESTSENT, PaymentRequestsController.paymentRequestSentView);
+            get(PAYMENTREQUEST, PaymentRequestsController.paymentRequestView);
             get(PAYMENTREQUESTRECEIVED, PaymentRequestsController.paymentRequestReceivedView);
             get(NEWEXPENSES,           ExpensesController.newexpense);
             post(CREATEEXPENSE, ExpensesController.expenseAction);
+            post(PAYMENTREQUESTACTION, PaymentRequestsController.paymentRequest);
         });
     }
 }
