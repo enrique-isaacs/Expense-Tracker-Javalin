@@ -9,6 +9,56 @@
     <section class="expenseList">
         <h2>People that you owe</h2>
         <p id="no_payment_requests_received" th:if="${#lists.isEmpty(paymentRequest)}">You don't owe anyone anything</p>
+        <table th:unless="${#lists.isEmpty(paymentRequest)}">
+            <th>
+                <tr>
+                    <td>
+                        Who
+                    </td>
+                    <td>
+                        What
+                    </td>
+                    <td>
+                        Due in
+                    </td>
+                    <td>
+                        How Much
+                    </td>
+                </tr>
+            </th>
+            <tbody>
+                <tr th:each="PaymentRequests : ${paymentRequest}">
+                    <td th:text="${PaymentRequests.getPersonRequestingPayment.getName}"></td>
+                    <td th:text="${PaymentRequests.getDescription}"></td>
+                    <td th:text="${PaymentRequests.daysLeftToPay}"></td>
+                    <td th:text="${PaymentRequests.getAmountToPay}"></td>
+                    <td>
+                        <form action="payment.action" method="post">
+                            <label for="paymentId"></label>
+                            <input type="hidden" name="paymentId" id="paymentId" th:value="${PaymentRequests.getId}">
+                            
+                            <input th:unless="${PaymentRequests.isPaid}" type="submit" value="Pay">
+                            <span th:if="${PaymentRequests.isPaid}" > 
+                                <input type="checkbox" checked="checked" disabled="disabled">
+                            </span>
+                        </form>
+                    </td> 
+                </tr>
+            </tbody>
+            <tf>
+                <tr>
+                    <td>
+                        Total Unpaid
+                    </td>
+                    <td colspan="2">
+                        
+                    </td>
+                    <td id="grand_total" th:text="${totalUnpaid}">
+                        
+                    </td>
+                </tr>
+            </tf>
+        </table>
     </section>
 </div>
 </body>

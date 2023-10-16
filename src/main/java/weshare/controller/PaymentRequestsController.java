@@ -13,6 +13,7 @@ import javax.money.MonetaryAmount;
 import io.javalin.http.Handler;
 import weshare.model.Expense;
 import weshare.model.MoneyHelper;
+import weshare.model.Payment;
 import weshare.model.PaymentRequest;
 import weshare.model.Person;
 import weshare.persistence.ExpenseDAO;
@@ -29,7 +30,13 @@ public class PaymentRequestsController {
         Person personLoggedIn = WeShareServer.getPersonLoggedIn(context);
 
         Collection<PaymentRequest> paymentRequestsSent = expensesDAO.findPaymentRequestsSent(personLoggedIn);
-        Map<String, Object> viewModel = Map.of("paymentRequest", paymentRequestsSent);
+
+        MonetaryAmount total = MoneyHelper.amountOf(0);
+        for(PaymentRequest paymentRequest: paymentRequestsSent){
+            total = total.add(paymentRequest.getAmountToPay());
+        }
+
+        Map<String, Object> viewModel = Map.of("paymentRequest", paymentRequestsSent, "totalUnpaid", total);
         context.render("paymentrequests_sent.html", viewModel);
     };
 
@@ -39,7 +46,11 @@ public class PaymentRequestsController {
         Person personLoggedIn = WeShareServer.getPersonLoggedIn(context);
 
         Collection<PaymentRequest> paymentRequestsReceived = expensesDAO.findPaymentRequestsReceived(personLoggedIn);
-        Map<String, Object> viewModel = Map.of("paymentRequest", paymentRequestsReceived);
+        MonetaryAmount total = MoneyHelper.amountOf(0);
+        for(PaymentRequest paymentRequest : paymentRequestsReceived){
+            total = total.add(paymentRequest.getAmountToPay());
+        }
+        Map<String, Object> viewModel = Map.of("paymentRequest", paymentRequestsReceived, "totalUnpaid", total);
         context.render("paymentrequests_received.html", viewModel);
     };
 
@@ -96,5 +107,23 @@ public class PaymentRequestsController {
         expense.requestPayment(person, amount, date);
 
         context.redirect(Routes.PAYMENTREQUEST+"?expenseId="+expenseId);
+    };
+
+    public static final Handler payment = context -> {
+        ExpenseDAO expensesDAO = ServiceRegistry.lookup(ExpenseDAO.class);
+        Person personLoggedIn = WeShareServer.getPersonLoggedIn(context);
+
+        String paymentId = context.formParam("paymentId");
+
+        Collection<PaymentRequest> paymentRequestReceived = expensesDAO.findPaymentRequestsReceived(personLoggedIn);
+        for(PaymentRequest paymentRequest : paymentRequestReceived){
+            if(paymentRequest.getId().equals(UUID.fromString(paymentId))){
+                Payment payment = paymentRequest.pay(personLoggedIn, LocalDate.now());
+                Expense expense = payment.getExpenseForPersonPaying();
+                expensesDAO.save(expense);
+            }
+        }
+
+        context.redirect(Routes.PAYMENTREQUESTRECEIVED);
     };
 }

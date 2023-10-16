@@ -9,6 +9,45 @@
     <section class="expenseList">
         <h2>People that owe me</h2>
         <p id="no_payment_requests_sent" th:if="${#lists.isEmpty(paymentRequest)}">Nobody owes you anything</p>
+        <table th:unless="${#lists.isEmpty(paymentRequest)}">
+            <th>
+                <tr>
+                    <td>
+                        Who
+                    </td>
+                    <td>
+                        What
+                    </td>
+                    <td>
+                        Due in
+                    </td>
+                    <td>
+                        How Much
+                    </td>
+                </tr>
+            </th>
+            <tbody>
+                <tr th:each="PaymentRequests : ${paymentRequest}">
+                    <td th:text="${PaymentRequests.getPersonWhoShouldPayBack.getName}"></td>
+                    <td th:text="${PaymentRequests.getDescription}"></td>
+                    <td th:text="${PaymentRequests.daysLeftToPay}"></td>
+                    <td th:text="${PaymentRequests.getAmountToPay}"></td>
+                </tr>
+            </tbody>
+            <tf>
+                <tr>
+                    <td>
+                        Total Unpaid
+                    </td>
+                    <td colspan="2">
+                        
+                    </td>
+                    <td th:text="${totalUnpaid}">
+                        
+                    </td>
+                </tr>
+            </tf>
+        </table>
     </section>
 </div>
 </body>

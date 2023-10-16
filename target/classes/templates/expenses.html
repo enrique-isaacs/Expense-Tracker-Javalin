@@ -6,9 +6,13 @@
 <head></head>
 <body>
 <div layout:fragment="contents">
+    
     <section class="expenseList">
         <h2>My Expenses</h2>
-        <a id="add_expense" href="/newexpenses">Add a new expense</a>
+        <a id="add_expense" href="/newexpense">Add a new expense</a>
+        <div>
+
+        </div>
         <p id="no_expenses" th:if="${#lists.isEmpty(expenses)}">You don't have any expenses!</p>
         <table th:unless="${#lists.isEmpty(expenses)}">
             <thead>
@@ -22,7 +26,9 @@
                 </tr>
             </thead>
             <tbody>
-                <tr th:each="expense : ${expenses}">
+                
+                <tr  th:each="expense : ${expenses}">
+                    
                     <td th:id = "date_+${expense.id}" th:text="${expense.getDate()}">When</td>
                     <td th:id="description_+${expense.id}">
                         <a th:href="'/paymentrequest?expenseId=' +${expense.id}" th:id="payment_request_+${expense.id}" th:text="${expense.getDescription()}">What</a>
@@ -31,6 +37,7 @@
                     <td th:id = "request_+${expense.id}" th:text="${expense.totalAmountOfPaymentsRequested()}">Payments Requested</td>
                     <td th:id = "received_+${expense.id}" th:text="${expense.totalAmountForPaymentsReceived()}">Payments Received</td>
                     <td th:id = "nett_+${expense.id}" th:text="${expense.amountLessPaymentsReceived()}">Nett Expense</td>
+
                 </tr>
             </tbody>
             <tfoot> 
