@@ -25,6 +25,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.Objects;
+import java.util.concurrent.TimeUnit;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -72,7 +73,7 @@ public abstract class WebTestRunner {
         WebDriverManager.firefoxdriver();
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--no-sandbox"); // necessary for grading environment
-        options.addArguments("--headless");
+        // options.addArguments("--headless");
         options.addArguments("--disable-gpu");
         options.addArguments("--start-maximized");
         options.addArguments("--start-fullscreen");

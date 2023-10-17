@@ -8,7 +8,7 @@
 <div layout:fragment="contents">
     <section class="expenseList">
         <h2>People that you owe</h2>
-        <p id="no_payment_requests_received" th:if="${#lists.isEmpty(paymentRequest)}">You don't owe anyone anything</p>
+        <p id="no_payment_requests_received" th:if="${#lists.isEmpty(paymentRequest)}">You don't owe anyone anything!</p>
         <table th:unless="${#lists.isEmpty(paymentRequest)}">
             <th>
                 <tr>
@@ -32,7 +32,7 @@
                     <td th:text="${PaymentRequests.getDescription}"></td>
                     <td th:text="${PaymentRequests.daysLeftToPay}"></td>
                     <td th:text="${PaymentRequests.getAmountToPay}"></td>
-                    <td>
+                    <td id="paid_1">
                         <form action="payment.action" method="post">
                             <label for="paymentId"></label>
                             <input type="hidden" name="paymentId" id="paymentId" th:value="${PaymentRequests.getId}">
